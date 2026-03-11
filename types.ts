@@ -1,10 +1,10 @@
 
-export interface HairstyleOption {
+export interface GolfStyleOption {
   id: string;
   label: string;
   description: string;
-  category: 'length' | 'texture' | 'color' | 'style';
-  imageUrl?: string; // Added for visual menu
+  category: 'terrain' | 'bunkering' | 'greens' | 'aesthetic';
+  imageUrl?: string;
 }
 
 export interface GeneratedImage {
@@ -15,12 +15,12 @@ export interface GeneratedImage {
   timestamp: number;
 }
 
-export type ViewType = 'front' | 'side' | 'back';
+export type ViewType = 'main' | 'aerial' | 'perspective';
 
 export interface UploadedImages {
-  front: string | null; // base64
-  side: string | null; // base64
-  back: string | null; // base64
+  main: string | null; // base64
+  aerial: string | null; // base64
+  perspective: string | null; // base64
 }
 
 export interface AppState {

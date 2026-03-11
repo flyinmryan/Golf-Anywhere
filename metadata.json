@@ -1,7 +1,7 @@
 
 {
-  "name": "HairStyle AI Studio",
-  "description": "Try out new hairstyles using advanced Gemini AI. Upload your photo and see yourself with a fresh look in seconds.",
+  "name": "Golf Course Architect AI",
+  "description": "Transform any landscape into a professional golf course using advanced Gemini AI. Upload a photo of a site and see it reimagined as a world-class course in seconds.",
   "requestFramePermissions": [
     "camera"
   ]

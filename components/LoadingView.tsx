@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { LoadingSpinner } from './LoadingSpinner';
-import { Sparkles, Terminal, Activity, Lock, Cpu } from 'lucide-react';
+import { Terminal, Activity, Lock, Cpu } from 'lucide-react';
 
 interface LoadingViewProps {
   userImage?: string | null;
@@ -37,33 +37,33 @@ export const LoadingView: React.FC<LoadingViewProps> = ({
             />
             
             {/* Grid Overlay */}
-            <div className="absolute inset-0 bg-[linear-gradient(rgba(0,255,136,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,255,136,0.03)_1px,transparent_1px)] bg-[size:20px_20px]"></div>
+            <div className="absolute inset-0 bg-[linear-gradient(rgba(16,185,129,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(16,185,129,0.03)_1px,transparent_1px)] bg-[size:20px_20px]"></div>
             
             {/* Scanning Line */}
-            <div className="absolute top-0 left-0 w-full h-[2px] bg-primary-400 shadow-[0_0_15px_rgba(168,85,247,0.8)] animate-scan"></div>
+            <div className="absolute top-0 left-0 w-full h-[2px] bg-emerald-400 shadow-[0_0:15px_rgba(16,185,129,0.8)] animate-scan"></div>
             
             {/* HUD Elements */}
-            <div className="absolute top-4 left-4 flex items-center gap-2 text-[10px] font-mono text-primary-300 bg-black/60 px-2 py-1 rounded backdrop-blur-sm border border-primary-500/30">
+            <div className="absolute top-4 left-4 flex items-center gap-2 text-[10px] font-mono text-emerald-300 bg-black/60 px-2 py-1 rounded backdrop-blur-sm border border-emerald-500/30">
                <Activity size={12} className="animate-pulse" />
-               <span>ANALYZING GEOMETRY</span>
+               <span>ANALYZING TERRAIN</span>
             </div>
 
-            <div className="absolute bottom-4 right-4 flex items-center gap-2 text-[10px] font-mono text-primary-300 bg-black/60 px-2 py-1 rounded backdrop-blur-sm border border-primary-500/30">
+            <div className="absolute bottom-4 right-4 flex items-center gap-2 text-[10px] font-mono text-emerald-300 bg-black/60 px-2 py-1 rounded backdrop-blur-sm border border-emerald-500/30">
                <Cpu size={12} className="animate-spin-slow" />
-               <span>GEMINI 3 IMAGE</span>
+               <span>GEMINI 3 ARCHITECT</span>
             </div>
             
              {/* Center Spinner/Status */}
              <div className="absolute inset-0 flex items-center justify-center">
                  <div className="bg-black/40 backdrop-blur-sm p-4 rounded-full border border-white/10 shadow-xl flex items-center gap-3">
                     <LoadingSpinner size="sm" />
-                    <span className="text-xs font-bold text-white tracking-widest uppercase animate-pulse">Scanning</span>
+                    <span className="text-xs font-bold text-white tracking-widest uppercase animate-pulse">Designing</span>
                  </div>
              </div>
           </div>
         ) : (
           <div className="h-full flex items-center justify-center">
-             <LoadingSpinner size="lg" message="Initializing..." />
+             <LoadingSpinner size="lg" message="Initializing Architect..." />
           </div>
         )}
       </div>
@@ -74,7 +74,7 @@ export const LoadingView: React.FC<LoadingViewProps> = ({
         <div className="flex items-center justify-between px-4 py-3 bg-[#161b22] border-b border-gray-800">
            <div className="flex items-center gap-2 text-gray-400">
                <Terminal size={14} />
-               <span className="font-bold text-gray-200">GEMINI NANO BANNA MODEL</span>
+               <span className="font-bold text-gray-200">GEMINI ARCHITECT MODEL</span>
            </div>
            <div className="flex gap-1.5">
                <div className="w-2.5 h-2.5 rounded-full bg-red-500/80"></div>
@@ -91,23 +91,23 @@ export const LoadingView: React.FC<LoadingViewProps> = ({
           <div className="text-gray-500 mb-4">
              // Session started: {new Date().toLocaleTimeString()}
              <br/>
-             // Target: {prompt || "Unknown Style"}
+             // Design Objective: {prompt || "Custom Landscape"}
           </div>
 
           {thoughts ? (
               <div className="whitespace-pre-wrap leading-relaxed">
                   {thoughts.split('\n').map((line, i) => (
-                      <div key={i} className={`${line.startsWith('-') || line.startsWith('*') ? 'text-blue-300' : 'text-gray-300'} mb-1`}>
+                      <div key={i} className={`${line.startsWith('-') || line.startsWith('*') ? 'text-emerald-300' : 'text-gray-300'} mb-1`}>
                           <span className="text-gray-600 mr-2 opacity-50">$</span>
                           {line}
                       </div>
                   ))}
-                  <span className="inline-block w-2 h-4 bg-primary-500 ml-1 animate-pulse align-middle"></span>
+                  <span className="inline-block w-2 h-4 bg-emerald-500 ml-1 animate-pulse align-middle"></span>
               </div>
           ) : (
              <div className="flex items-center gap-2 text-gray-500 italic">
                 <span className="w-2 h-2 bg-gray-600 rounded-full animate-ping"></span>
-                Connecting to neural engine...
+                Routing course map...
              </div>
           )}
         </div>
@@ -116,9 +116,9 @@ export const LoadingView: React.FC<LoadingViewProps> = ({
         <div className="px-4 py-2 bg-[#161b22] border-t border-gray-800 text-[10px] text-gray-500 flex justify-between items-center">
             <div className="flex items-center gap-1.5">
                 <Lock size={10} />
-                <span>E2E ENCRYPTED STREAM</span>
+                <span>E2E ARCHITECTURAL STREAM</span>
             </div>
-            <span>v3.0.0-preview</span>
+            <span>v3.0.0-pro</span>
         </div>
       </div>
 

@@ -1,30 +1,30 @@
 import React from 'react';
-import { Ruler, Palette, Layers, Scissors } from 'lucide-react';
+import { Shovel, Flag, Leaf, Waves } from 'lucide-react';
 
 export const REFINEMENT_TOOLS = [
   { 
-    id: 'length', 
-    label: 'Length', 
-    icon: Ruler,
-    options: ['Trim ends', 'Shoulder length', 'Chin length', 'Short pixie', 'Long extensions'] 
+    id: 'bunkering', 
+    label: 'Bunkering', 
+    icon: Shovel,
+    options: ['Deep pot bunkers', 'Frayed edges', 'Geometric shape', 'Grass hollows', 'Add waste area'] 
   },
   { 
-    id: 'color', 
-    label: 'Color', 
-    icon: Palette,
-    options: ['Lighter', 'Darker', 'Warmer tone', 'Cooler tone', 'Add highlights', 'Root shadow'] 
+    id: 'greens', 
+    label: 'Green Design', 
+    icon: Flag,
+    options: ['Tiered levels', 'Island green', 'Punchbowl shape', 'Infinity edge', 'False front'] 
   },
   { 
-    id: 'texture', 
-    label: 'Texture', 
-    icon: Layers,
-    options: ['More volume', 'Less volume', 'Smoother', 'Messier', 'Defined curls'] 
+    id: 'vegetation', 
+    label: 'Vegetation', 
+    icon: Leaf,
+    options: ['More trees', 'Clear brush', 'Native grasses', 'Lush fairways', 'Pine straw base'] 
   },
   {
-    id: 'cut',
-    label: 'Cut Details',
-    icon: Scissors,
-    options: ['Add bangs', 'Curtain bangs', 'Face framing', 'Blunt cut', 'Razored edges']
+    id: 'hazards',
+    label: 'Hazards',
+    icon: Waves,
+    options: ['Add pond', 'Winding stream', 'Rock outcropping', 'Deep rough', 'Stone bridge']
   }
 ];
 
@@ -51,8 +51,8 @@ export const RefinementTools: React.FC<RefinementToolsProps> = ({ selectedOption
                   className={`
                     text-left text-xs px-2.5 py-1.5 rounded-lg border transition-all whitespace-nowrap
                     ${selectedOptions.includes(option)
-                      ? 'bg-primary-100 dark:bg-primary-900/30 border-primary-500 text-primary-700 dark:text-primary-300'
-                      : 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 hover:border-primary-400 dark:hover:border-primary-500 hover:text-primary-700 dark:hover:text-primary-300'}
+                      ? 'bg-emerald-100 dark:bg-emerald-900/30 border-emerald-500 text-emerald-700 dark:text-emerald-300'
+                      : 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 hover:border-emerald-400 dark:hover:border-emerald-500 hover:text-emerald-700 dark:hover:text-emerald-300'}
                   `}
                 >
                   {option}

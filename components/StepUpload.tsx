@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { ArrowRight, Sparkles, Scan, Layers, ImageOff } from 'lucide-react';
+import { ArrowRight, Mountain, Map, Compass } from 'lucide-react';
 import { ImageUpload } from './ImageUpload';
 import { UploadedImages, ViewType, GeneratedImage } from '../types';
 
@@ -13,11 +13,11 @@ interface StepUploadProps {
   onJumpToResult: (result: GeneratedImage) => void;
 }
 
-// Using the images from the reference HTML for the carousel/preview
+// Using some generic landscape/golf placeholders
 const PREVIEW_IMAGES = [
-    "https://lh3.googleusercontent.com/aida-public/AB6AXuB867EDnyWooX1XbHR4DzA-2wsiYwXWoUd7CFPTgetB3znTRUGickoKiYxHGNIooU0cWUAXf3ImP-QdrSJ7Cwf4admTYA0jtsxqQF_eejlc48oAe-uQzV1gLxr_r9Kzbog7n8iu_K0Xe_IUpmFY1alnXrsFdyUh0z6rlG57SYtGWNshq-zYtC-h7ik14pu0_9bOoqLnlqZevDGSeLZIAgrcfqOnVrTn42c0p4BmyFuVHUlM3S1uyhfjEyeDWjg0W71lpbZGTkejoQx2",
-    "https://lh3.googleusercontent.com/aida-public/AB6AXuC3JP9GcL8oVNPzIuNtzmkCADBsiKk5FMp3SkoRIe_y8-KUMTf2DREvLdBHVEZjZUa9fufxzyZPtWb-ehBQbCEDaJlTB6a3WzTjSUuapnW8pwETTITtDQZ_W3TQEnPItJ2_WvwQmW4ukeevNDRuSk15XCGn3kBTMQNWRXlcLNwT3tlwYG1kN-0Pip9oju3hBq7G96CrxIexzjpegpUxXzTgYDLqalajC4janpCCvOF9byHW429zMb9r9YYa1G8pm2ZJhEBSDDDvjNB3",
-    "https://lh3.googleusercontent.com/aida-public/AB6AXuBvhj1_bJZHXWlWBp8hyZhsj0AwNmW-TGG09_WTC9tG_VMwi7F7fxKTKkn-jPoKQUAs4OcM1RckDoHVV2hcbvRF-_LzV3ZU3keN4s2CkneEwZkXjwZqGSfqi7I_Xon6rbY3E4BcJemUEegiXoflqWdABP2mfY4Nj8ODgW06MKkrOybNJcIIBrBpKH-jNhJpYphFyt555QFNgI5mnAYxvYl7ty0vhl5f6OTZGpadMEsERgZsKuKT8dYFLV71SRW-o1dN63mOv87pCX8n"
+    "https://images.unsplash.com/photo-1587174486073-ae5e5cff23aa?q=80&w=1000&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1535131749006-b7f58c99034b?q=80&w=1000&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1592919016381-f07ecd5a244a?q=80&w=1000&auto=format&fit=crop"
 ];
 
 export const StepUpload: React.FC<StepUploadProps> = ({ images, history, onUpload, onClear, onNext, onJumpToResult }) => {
@@ -28,11 +28,11 @@ export const StepUpload: React.FC<StepUploadProps> = ({ images, history, onUploa
       <div className="w-full lg:w-5/12 flex flex-col gap-6">
             <div className="space-y-3">
                 <h1 className="text-4xl lg:text-5xl font-extrabold leading-tight text-slate-900 dark:text-white">
-                    Reinvent your look <br />
-                    <span className="text-gradient">in seconds.</span>
+                    Design your dream course <br />
+                    <span className="text-emerald-600">in seconds.</span>
                 </h1>
                 <p className="text-base text-slate-600 dark:text-slate-400 leading-relaxed max-w-lg">
-                    Try on trending styles from photos or videos to find your perfect cut. Compare looks, choose your favorite, and make your next styling decision amazing.
+                    Transform any landscape into a world-class golf course using advanced AI. Upload your site photos, select an architectural style, and watch your vision come to life.
                 </p>
             </div>
 
@@ -43,32 +43,33 @@ export const StepUpload: React.FC<StepUploadProps> = ({ images, history, onUploa
                         <div className="w-2.5 h-2.5 rounded-full bg-amber-400"></div>
                         <div className="w-2.5 h-2.5 rounded-full bg-green-400"></div>
                     </div>
-                    <span className="text-[10px] font-mono text-slate-500 uppercase tracking-widest">Preview Mode: Vibrant Copper</span>
+                    <span className="text-[10px] font-mono text-slate-500 uppercase tracking-widest">Preview Mode: Parkland Classic</span>
                     <div className="w-8"></div> 
                 </div>
                 <div className="p-3 bg-slate-50 dark:bg-slate-800">
-                    <div className="grid grid-cols-3 gap-2 h-40 sm:h-56">
-                         {PREVIEW_IMAGES.map((src, i) => (
-                            <div key={i} className="relative rounded-lg overflow-hidden bg-slate-200 dark:bg-slate-700 h-full">
+                    <div className="grid grid-cols-1 gap-2 h-40 sm:h-56">
+                         <div className="relative rounded-lg overflow-hidden bg-slate-200 dark:bg-slate-700 h-full">
                                 <img 
-                                    src={src} 
-                                    alt={`Preview view ${i+1}`} 
-                                    className={`object-cover w-full h-full opacity-90 hover:scale-105 transition-transform duration-700 ${i === 2 ? 'transform scale-x-[-1]' : ''}`} 
+                                    src={PREVIEW_IMAGES[0]} 
+                                    alt="Golf Course Preview" 
+                                    className="object-cover w-full h-full opacity-90 hover:scale-105 transition-transform duration-700" 
                                 />
-                            </div>
-                         ))}
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex items-end p-4">
+                                    <span className="text-white text-xs font-bold">St. Andrews Inspiration</span>
+                                </div>
+                         </div>
                     </div>
                 </div>
             </div>
 
             <div className="flex gap-6 justify-center lg:justify-start pt-1">
                 <div className="flex items-center gap-2 text-slate-500 dark:text-slate-400 font-medium text-sm">
-                    <span className="material-icons text-primary text-lg">center_focus_weak</span>
-                    Face Mapping
+                    <Mountain className="text-emerald-600" size={18} />
+                    Terrain Analysis
                 </div>
                 <div className="flex items-center gap-2 text-slate-500 dark:text-slate-400 font-medium text-sm">
-                    <span className="material-icons text-primary text-lg">view_in_ar</span>
-                    360° Matrix
+                    <Map className="text-emerald-600" size={18} />
+                    Hole Routing
                 </div>
             </div>
       </div>
@@ -78,39 +79,39 @@ export const StepUpload: React.FC<StepUploadProps> = ({ images, history, onUploa
             <div className="bg-card-light dark:bg-card-dark rounded-3xl p-6 shadow-soft dark:shadow-none border border-slate-100 dark:border-slate-700">
                 <div className="flex justify-between items-start mb-6">
                     <div>
-                        <h2 className="text-xl font-bold text-slate-900 dark:text-white">Step 1: The Canvas</h2>
-                        <p className="text-sm text-slate-500 dark:text-slate-400 mt-0.5">Upload at least one photo.</p>
+                        <h2 className="text-xl font-bold text-slate-900 dark:text-white">Step 1: The Landscape</h2>
+                        <p className="text-sm text-slate-500 dark:text-slate-400 mt-0.5">Upload a photo of the potential course site.</p>
                     </div>
-                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-indigo-50 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-300 border border-indigo-100 dark:border-indigo-800">
-                        Required: Front
+                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-emerald-50 dark:bg-emerald-900/50 text-emerald-600 dark:text-emerald-300 border border-emerald-100 dark:border-emerald-800">
+                        Required: Main View
                     </span>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
                     <div className="flex flex-col gap-2">
-                         <span className="text-xs font-bold uppercase text-slate-500 dark:text-slate-400 pl-1">Front View</span>
+                         <span className="text-xs font-bold uppercase text-slate-500 dark:text-slate-400 pl-1">Main Landscape</span>
                          <ImageUpload
-                            view="front"
-                            image={images.front}
+                            view="main"
+                            image={images.main}
                             onUpload={onUpload}
                             onClear={onClear}
                             required
                         />
                     </div>
                      <div className="flex flex-col gap-2">
-                         <span className="text-xs font-bold uppercase text-slate-500 dark:text-slate-400 pl-1">Side View</span>
+                         <span className="text-xs font-bold uppercase text-slate-500 dark:text-slate-400 pl-1">Aerial View</span>
                          <ImageUpload
-                            view="side"
-                            image={images.side}
+                            view="aerial"
+                            image={images.aerial}
                             onUpload={onUpload}
                             onClear={onClear}
                         />
                     </div>
                      <div className="flex flex-col gap-2">
-                         <span className="text-xs font-bold uppercase text-slate-500 dark:text-slate-400 pl-1">Back View</span>
+                         <span className="text-xs font-bold uppercase text-slate-500 dark:text-slate-400 pl-1">Perspective</span>
                          <ImageUpload
-                            view="back"
-                            image={images.back}
+                            view="perspective"
+                            image={images.perspective}
                             onUpload={onUpload}
                             onClear={onClear}
                         />
@@ -119,33 +120,33 @@ export const StepUpload: React.FC<StepUploadProps> = ({ images, history, onUploa
 
                 <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-slate-100 dark:border-slate-800">
                     <p className="text-[10px] text-slate-400 max-w-xs text-center sm:text-left leading-tight">
-                        Photos are processed securely in memory and never stored permanently.
+                        Landscape photos are processed securely and used only for architectural visualization.
                     </p>
                     <button 
                         className={`w-full sm:w-auto px-8 py-3 rounded-xl font-bold text-base flex items-center justify-center gap-2 transition-all whitespace-nowrap
-                            ${images.front 
-                                ? 'bg-primary text-white shadow-glow hover:shadow-lg hover:bg-primary-dark cursor-pointer' 
+                            ${images.main 
+                                ? 'bg-emerald-600 text-white shadow-lg hover:shadow-emerald-500/25 hover:bg-emerald-700 cursor-pointer' 
                                 : 'bg-slate-100 dark:bg-slate-800 text-slate-300 dark:text-slate-500 cursor-not-allowed'}`}
-                        disabled={!images.front}
+                        disabled={!images.main}
                         onClick={onNext}
                     >
-                        Choose Your Style
+                        Define Your Design
                         <ArrowRight size={18} />
                     </button>
                 </div>
             </div>
 
-            {/* Resume Session Block (Custom Addition preserving existing functionality) */}
+            {/* Resume Session Block */}
             {history && history.length > 0 && (
                 <div className="mt-8 p-4 bg-slate-50 dark:bg-slate-800/50 rounded-2xl border border-slate-200 dark:border-slate-700 flex items-center justify-between">
                      <span className="text-sm font-medium text-slate-600 dark:text-slate-400">
-                        You have {history.length} generated styles in this session.
+                        You have {history.length} designs in this session.
                      </span>
                      <button 
                         onClick={() => onJumpToResult(history[0])}
-                        className="text-primary hover:text-primary-dark font-semibold text-sm hover:underline"
+                        className="text-emerald-600 hover:text-emerald-700 font-semibold text-sm hover:underline"
                     >
-                        View History
+                        View Gallery
                      </button>
                 </div>
             )}

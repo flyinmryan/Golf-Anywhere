@@ -52,7 +52,7 @@ export const MarketingModal: React.FC<MarketingModalProps> = ({ isOpen, onClose,
                 </div>
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">{title}</h2>
                 <p className="text-gray-600 dark:text-gray-400 text-sm">
-                  This feature is coming soon to HairStyle AI Pro. Enter your email to get early access and a 20% discount.
+                  This feature is coming soon to Golf Architect AI Pro. Enter your email to get early access and a 20% discount.
                 </p>
               </div>
 

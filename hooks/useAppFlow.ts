@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { AppState, GeneratedImage, ViewType } from '../types';
-import { generateHairstyleImage, refineHairstyleImage, generateTitleFromPrompt } from '../services/geminiService';
+import { generateGolfCourseImage, refineGolfCourseImage, generateTitleFromPrompt } from '../services/geminiService';
 import { saveImage, getImage, clearAllImages, deleteImage } from '../services/imageStorage';
 
 export const useAppFlow = () => {
   const [hasKey, setHasKey] = useState(false);
   const [state, setState] = useState<AppState>({
     step: 'upload',
-    images: { front: null, side: null, back: null },
+    images: { main: null, aerial: null, perspective: null },
     selectedStyle: '',
     customPrompt: '',
     styleReferenceImage: null,
@@ -46,7 +46,7 @@ export const useAppFlow = () => {
   useEffect(() => {
     const loadHistory = async () => {
       try {
-        const saved = localStorage.getItem('hairstyle_history');
+        const saved = localStorage.getItem('golf_design_history');
         if (saved) {
           const parsed: GeneratedImage[] = JSON.parse(saved);
           // Hydrate images from IndexedDB
@@ -75,7 +75,7 @@ export const useAppFlow = () => {
         ...item,
         url: item.id // Use ID as placeholder
       }));
-      localStorage.setItem('hairstyle_history', JSON.stringify(metadataOnly));
+      localStorage.setItem('golf_design_history', JSON.stringify(metadataOnly));
     }
   }, [state.history]);
 
@@ -100,23 +100,22 @@ export const useAppFlow = () => {
   }, []);
 
   const handleGenerate = async (styleOverride?: string) => {
-    if (!state.images.front) return;
+    if (!state.images.main) return;
     setState(prev => ({ ...prev, step: 'generating' }));
     setCurrentThoughts(""); // Clear previous thoughts
 
     const promptToUse = styleOverride || state.selectedStyle || state.customPrompt;
 
     try {
-      const [imageUrl, title] = await Promise.all([
-        generateHairstyleImage(
-          state.images,
-          promptToUse,
-          state.styleReferenceImage,
-          state.styleReferenceUrl,
-          (thought) => setCurrentThoughts(prev => prev + thought)
-        ),
-        generateTitleFromPrompt(promptToUse)
-      ]);
+      const imageUrl = await generateGolfCourseImage(
+        state.images,
+        promptToUse,
+        state.styleReferenceImage,
+        state.styleReferenceUrl,
+        (thought) => setCurrentThoughts(prev => prev + thought)
+      );
+
+      const title = await generateTitleFromPrompt(promptToUse);
 
       const newResult: GeneratedImage = {
         id: Date.now().toString(),
@@ -136,7 +135,7 @@ export const useAppFlow = () => {
       }));
     } catch (error) {
       console.error(error);
-      alert("Failed to generate hairstyle. Please try again.");
+      alert("Failed to generate design. Please try again.");
       setState(prev => ({ ...prev, step: 'style' }));
     }
   };
@@ -149,7 +148,7 @@ export const useAppFlow = () => {
 
     try {
       const [imageUrl, title] = await Promise.all([
-        refineHairstyleImage(
+        refineGolfCourseImage(
           state.generatedResult.url,
           instruction,
           refImage,
@@ -176,7 +175,7 @@ export const useAppFlow = () => {
       }));
     } catch (error) {
       console.error(error);
-      alert("Failed to refine image.");
+      alert("Failed to refine design.");
     } finally {
       setIsRefining(false);
     }
@@ -184,7 +183,7 @@ export const useAppFlow = () => {
 
   const handleDeleteHistoryItem = async (id: string, e: React.MouseEvent) => {
     e.stopPropagation();
-    if (confirm("Are you sure you want to delete this image?")) {
+    if (confirm("Are you sure you want to delete this design?")) {
       await deleteImage(id);
       setState(prev => {
         const newHistory = prev.history.filter(item => item.id !== id);
@@ -205,7 +204,7 @@ export const useAppFlow = () => {
   const handleClearHistory = async () => {
     if (confirm("Are you sure you want to clear your history? This cannot be undone.")) {
       await clearAllImages();
-      localStorage.removeItem('hairstyle_history');
+      localStorage.removeItem('golf_design_history');
       setState(prev => ({ ...prev, history: [], generatedResult: null, step: 'upload' }));
     }
   };
@@ -214,7 +213,7 @@ export const useAppFlow = () => {
     if (state.step === 'generating') return;
 
     const canGoToUpload = true;
-    const canGoToStyle = !!state.images.front || state.history.length > 0;
+    const canGoToStyle = !!state.images.main || state.history.length > 0;
     const canGoToResult = !!state.generatedResult;
 
     if (target === 'upload' && canGoToUpload) {

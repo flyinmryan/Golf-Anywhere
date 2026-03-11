@@ -1,5 +1,5 @@
 
-const DB_NAME = 'hairstyle-ai-db';
+const DB_NAME = 'golf-architect-ai-db';
 const STORE_NAME = 'images';
 const DB_VERSION = 1;
 

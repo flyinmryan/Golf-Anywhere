@@ -7,7 +7,7 @@ import { StepResult } from './components/StepResult';
 import { MarketingModal } from './components/MarketingModal';
 import { LoadingView } from './components/LoadingView';
 import { useAppFlow } from './hooks/useAppFlow';
-import { Sparkles, ChevronRight, Check, Trash2, Star } from 'lucide-react';
+import { Sparkles, Mountain, Flag, Star } from 'lucide-react';
 
 export const App = () => {
   const {
@@ -29,23 +29,23 @@ export const App = () => {
 
   // Navigation Logic Helpers
   const canGoToUpload = true;
-  const canGoToStyle = !!state.images.front || state.history.length > 0;
+  const canGoToStyle = !!state.images.main || state.history.length > 0;
   const canGoToResult = !!state.generatedResult;
 
   if (!hasKey) {
     return (
       <div className="min-h-screen bg-gray-50 dark:bg-gray-950 flex flex-col items-center justify-center p-4 text-center">
         <div className="max-w-md w-full bg-white dark:bg-gray-900 p-8 rounded-2xl shadow-xl border border-gray-100 dark:border-gray-800">
-          <div className="w-16 h-16 bg-primary-100 dark:bg-primary-900/30 rounded-full flex items-center justify-center mx-auto mb-6">
-            <Sparkles className="text-primary-600 dark:text-primary-400" size={32} />
+          <div className="w-16 h-16 bg-emerald-100 dark:bg-emerald-900/30 rounded-full flex items-center justify-center mx-auto mb-6">
+            <Flag className="text-emerald-600 dark:text-emerald-400" size={32} />
           </div>
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Welcome to HairStyle AI</h1>
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Welcome to Golf Architect AI</h1>
           <p className="text-gray-600 dark:text-gray-400 mb-6">
-            To generate high-quality hairstyles, we need to access the Gemini API. Please select a project to continue.
+            To generate professional golf course designs, we need to access the Gemini API. Please select a project to continue.
           </p>
           <button
             onClick={handleSelectKey}
-            className="w-full py-3 px-4 bg-primary-600 hover:bg-primary-700 text-white font-semibold rounded-xl transition-all shadow-lg hover:shadow-primary-500/25"
+            className="w-full py-3 px-4 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-xl transition-all shadow-lg hover:shadow-emerald-500/25"
           >
             Connect API Key
           </button>
@@ -60,36 +60,36 @@ export const App = () => {
       {/* Navbar */}
       <nav className="w-full px-6 py-4 flex items-center justify-between bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm sticky top-0 z-50 border-b border-slate-200 dark:border-slate-800">
         <div className="flex items-center gap-3 cursor-pointer" onClick={() => navigateTo('upload')}>
-          <div className="w-10 h-10 bg-gradient-to-br from-primary to-indigo-600 rounded-lg flex items-center justify-center text-white shadow-lg">
-            <span className="material-icons text-xl">content_cut</span>
+          <div className="w-10 h-10 bg-gradient-to-br from-emerald-500 to-teal-700 rounded-lg flex items-center justify-center text-white shadow-lg">
+            <Mountain size={24} />
           </div>
-          <span className="text-xl font-bold tracking-tight text-slate-800 dark:text-gray-100">HairStyle AI</span>
+          <span className="text-xl font-bold tracking-tight text-slate-800 dark:text-gray-100">Golf Architect AI</span>
         </div>
 
         <div className="hidden md:flex items-center bg-slate-100 dark:bg-slate-800 rounded-full px-2 py-1.5 gap-2">
            <button 
              onClick={() => navigateTo('upload')}
-             className={`flex items-center gap-2 px-3 py-1 rounded-full text-sm font-semibold transition-all ${state.step === 'upload' ? 'bg-white dark:bg-slate-700 shadow-sm text-primary cursor-default' : 'text-slate-500 dark:text-slate-400 hover:text-primary dark:hover:text-primary'}`}
+             className={`flex items-center gap-2 px-3 py-1 rounded-full text-sm font-semibold transition-all ${state.step === 'upload' ? 'bg-white dark:bg-slate-700 shadow-sm text-emerald-600 cursor-default' : 'text-slate-500 dark:text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-500'}`}
            >
-                <span className={`w-5 h-5 rounded-full flex items-center justify-center text-xs ${state.step === 'upload' ? 'bg-primary text-white' : 'bg-slate-200 dark:bg-slate-700 text-slate-500'}`}>1</span>
-                Upload
+                <span className={`w-5 h-5 rounded-full flex items-center justify-center text-xs ${state.step === 'upload' ? 'bg-emerald-600 text-white' : 'bg-slate-200 dark:bg-slate-700 text-slate-500'}`}>1</span>
+                Landscape
            </button>
            <span className="material-icons text-slate-400 text-xs">chevron_right</span>
            <button 
              onClick={() => navigateTo('style')}
              disabled={!canGoToStyle}
-             className={`flex items-center gap-2 px-3 py-1 rounded-full text-sm font-semibold transition-all ${state.step === 'style' ? 'bg-white dark:bg-slate-700 shadow-sm text-primary cursor-default' : 'text-slate-500 dark:text-slate-400'} ${canGoToStyle && state.step !== 'style' ? 'hover:text-primary dark:hover:text-primary' : ''} ${!canGoToStyle ? 'opacity-40 cursor-not-allowed' : ''}`}
+             className={`flex items-center gap-2 px-3 py-1 rounded-full text-sm font-semibold transition-all ${state.step === 'style' ? 'bg-white dark:bg-slate-700 shadow-sm text-emerald-600 cursor-default' : 'text-slate-500 dark:text-slate-400'} ${canGoToStyle && state.step !== 'style' ? 'hover:text-emerald-600 dark:hover:text-emerald-500' : ''} ${!canGoToStyle ? 'opacity-40 cursor-not-allowed' : ''}`}
            >
-                <span className={`w-5 h-5 rounded-full flex items-center justify-center text-xs ${state.step === 'style' ? 'bg-primary text-white' : 'bg-slate-200 dark:bg-slate-700 text-slate-500'}`}>2</span>
-                Style
+                <span className={`w-5 h-5 rounded-full flex items-center justify-center text-xs ${state.step === 'style' ? 'bg-emerald-600 text-white' : 'bg-slate-200 dark:bg-slate-700 text-slate-500'}`}>2</span>
+                Design
            </button>
            <span className="material-icons text-slate-400 text-xs">chevron_right</span>
            <button 
              onClick={() => navigateTo('result')}
              disabled={!canGoToResult}
-             className={`flex items-center gap-2 px-3 py-1 rounded-full text-sm font-semibold transition-all ${state.step === 'result' ? 'bg-white dark:bg-slate-700 shadow-sm text-primary cursor-default' : 'text-slate-500 dark:text-slate-400'} ${canGoToResult && state.step !== 'result' ? 'hover:text-primary dark:hover:text-primary' : ''} ${!canGoToResult ? 'opacity-40 cursor-not-allowed' : ''}`}
+             className={`flex items-center gap-2 px-3 py-1 rounded-full text-sm font-semibold transition-all ${state.step === 'result' ? 'bg-white dark:bg-slate-700 shadow-sm text-emerald-600 cursor-default' : 'text-slate-500 dark:text-slate-400'} ${canGoToResult && state.step !== 'result' ? 'hover:text-emerald-600 dark:hover:text-emerald-500' : ''} ${!canGoToResult ? 'opacity-40 cursor-not-allowed' : ''}`}
            >
-                <span className={`w-5 h-5 rounded-full flex items-center justify-center text-xs ${state.step === 'result' ? 'bg-primary text-white' : 'bg-slate-200 dark:bg-slate-700 text-slate-500'}`}>3</span>
+                <span className={`w-5 h-5 rounded-full flex items-center justify-center text-xs ${state.step === 'result' ? 'bg-emerald-600 text-white' : 'bg-slate-200 dark:bg-slate-700 text-slate-500'}`}>3</span>
                 Reveal
            </button>
         </div>
@@ -121,7 +121,7 @@ export const App = () => {
             onStyleImageChange={(val) => setState(prev => ({ ...prev, styleReferenceImage: val }))}
             styleReferenceUrl={state.styleReferenceUrl}
             onStyleUrlChange={(val) => setState(prev => ({ ...prev, styleReferenceUrl: val }))}
-            userImage={state.images.front}
+            userImage={state.images.main}
             onNext={() => handleGenerate()}
             onBack={() => setState(prev => ({ ...prev, step: 'upload' }))}
           />
@@ -129,15 +129,9 @@ export const App = () => {
 
         {(state.step === 'generating' || isRefining) && (
           <div className="fixed inset-0 z-50 bg-background-light dark:bg-background-dark overflow-y-auto">
-             {/* Re-use Navbar for consistency or just fullscreen overlay? 
-                 The request implies "same loading experience".
-                 The original was inline. 
-                 If we want it to look EXACTLY the same, we should probably just render it in place of content or overlay.
-                 Let's do an overlay to cover the Result screen.
-             */}
              <div className="min-h-screen p-4 flex flex-col">
                 <LoadingView 
-                  userImage={isRefining ? state.generatedResult?.url : state.images.front}
+                  userImage={isRefining ? state.generatedResult?.url : state.images.main}
                   prompt={isRefining ? refinementPrompt : (state.customPrompt || state.selectedStyle)}
                   thoughts={currentThoughts}
                 />
@@ -164,27 +158,26 @@ export const App = () => {
       </main>
 
       {/* Pro Banner Footer */}
-      {/* Pro Banner Footer */}
        <div className="container mx-auto px-6 pb-6 mt-auto">
-        <div className="w-full bg-gradient-to-r from-primary to-indigo-600 rounded-2xl p-4 sm:p-6 flex flex-col sm:flex-row items-center justify-between shadow-lg text-white">
+        <div className="w-full bg-gradient-to-r from-emerald-600 to-teal-700 rounded-2xl p-4 sm:p-6 flex flex-col sm:flex-row items-center justify-between shadow-lg text-white">
             <div className="flex items-center gap-4 mb-4 sm:mb-0">
                 <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm shrink-0">
-                    <span className="material-icons text-amber-300">star</span>
+                    <Star className="text-amber-300" />
                 </div>
                 <div>
-                    <h3 className="font-bold text-lg">Unlock Pro Features</h3>
-                    <p className="text-sm text-indigo-100">Get access to 4K resolution and advanced features.</p>
+                    <h3 className="font-bold text-lg">Unlock Pro Architect Features</h3>
+                    <p className="text-sm text-emerald-100">Get access to 4K resolution and advanced terrain analysis.</p>
                 </div>
             </div>
             <button 
                 onClick={() => setState(prev => ({ ...prev, isMarketingModalOpen: true }))}
-                className="bg-white text-primary hover:bg-indigo-50 font-bold py-2.5 px-6 rounded-lg transition-colors shadow-sm whitespace-nowrap w-full sm:w-auto"
+                className="bg-white text-emerald-700 hover:bg-emerald-50 font-bold py-2.5 px-6 rounded-lg transition-colors shadow-sm whitespace-nowrap w-full sm:w-auto"
             >
                 Join Waitlist
             </button>
         </div>
         <footer className="text-center py-6 text-xs text-slate-400">
-            © {new Date().getFullYear()} Hairstyle AI Studio. All rights reserved.
+            © {new Date().getFullYear()} Golf Course Architect AI. All rights reserved.
         </footer>
        </div>
 

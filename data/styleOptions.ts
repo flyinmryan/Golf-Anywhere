@@ -1,160 +1,101 @@
-import { Scissors, Palette, Waves, Sparkles } from 'lucide-react';
+import { Mountain, Shovel, Flag, Sparkles } from 'lucide-react';
 
 export const STYLE_PRINCIPLES = [
   {
-    id: 'cut',
-    label: 'Cut & Shape',
-    icon: Scissors,
-    options: ['Pixie', 'Bob', 'Lob', 'Shag', 'Wolf Cut', 'Mullet', 'Layered', 'Blunt', 'Undercut', 'Fade']
+    id: 'terrain',
+    label: 'Terrain & Layout',
+    icon: Mountain,
+    options: ['Rolling Hills', 'Flat Plateau', 'Dense Forest', 'Coastal Bluffs', 'Arid Desert', 'Wetland Oasis', 'Canyon Edge']
   },
   {
-    id: 'color',
-    label: 'Color & Tone',
-    icon: Palette,
-    options: ['Platinum', 'Balayage', 'Money Piece', 'Copper', 'Espresso', 'Pastel', 'Neon', 'Silver', 'Ombre']
+    id: 'bunkering',
+    label: 'Bunkering Style',
+    icon: Shovel,
+    options: ['Frayed Edge', 'Deep Pot Bunkers', 'Geometric', 'Flash-Faced', 'Waste Areas', 'Grass Hollows', 'Church Pews']
   },
   {
-    id: 'texture',
-    label: 'Texture & Finish',
-    icon: Waves,
-    options: ['Messy', 'Sleek', 'Wavy', 'Curly', 'Coily', 'Braided', 'Glass Hair', 'Voluminous']
+    id: 'greens',
+    label: 'Greens & Hazards',
+    icon: Flag,
+    options: ['Tiered Greens', 'Island Green', 'Infinity Edge', 'Punchbowl', 'Rock Outcroppings', 'Winding Stream', 'Hidden Pond']
   },
   {
     id: 'aesthetic',
-    label: 'Aesthetic',
+    label: 'Course Aesthetic',
     icon: Sparkles,
-    options: ['Y2K', 'Old Money', 'Clean Girl', 'Edgy', 'Soft Girl', 'Cyberpunk', 'Boho']
+    options: ['Augusta Lush', 'St. Andrews Rugged', 'Arizona Desert', 'Pacific Coastal', 'Tropical Paradise', 'Modern Minimalist', 'Golden Age']
   }
 ];
 
 export const STYLES = [
   {
-    category: "Women's Trending",
+    category: "Inland Designs",
     items: [
       {
-        id: 'wolf-cut',
-        label: 'Wolf Cut',
-        desc: 'Textured layers with curtain bangs',
-        img: 'images/optimized/women/wolf-cut.jpg'
+        id: 'parkland',
+        label: 'Parkland',
+        desc: 'Lush green fairways, mature trees, and manicured hazards',
+        img: 'public/images/optimized/inland/parkland.jpg'
       },
       {
-        id: 'mixie-cut',
-        label: 'The Mixie',
-        desc: 'Bold pixie-mullet hybrid with wispy nape',
-        img: 'images/mixie-cut-woman.png'
+        id: 'sandbelt',
+        label: 'Sandbelt',
+        desc: 'Firm, fast turf with bold, rugged bunkering cut into the greens',
+        img: 'public/images/optimized/inland/sandbelt.jpg'
       },
       {
-        id: 'holographic-shag',
-        label: 'Holographic Shag',
-        desc: 'Edgy shag with silver/pastel iridescent tones',
-        img: 'images/holographic-shag-woman.png'
-      },
-      {
-        id: 'copper-shag',
-        label: 'Copper Shag',
-        desc: '70s inspired shag in vibrant copper',
-        img: 'images/optimized/women/copper-shag.jpg'
-      },
-      {
-        id: 'butterfly-cut',
-        label: 'Butterfly Cut',
-        desc: 'Voluminous layers and face-framing',
-        img: 'images/optimized/women/butterfly-cut.jpg'
+        id: 'heathland',
+        label: 'Heathland',
+        desc: 'Inland links-style with purple heather, gorse, and sandy soil',
+        img: 'public/images/optimized/inland/heathland.jpg'
       }
     ]
   },
   {
-    category: "Women's Classics",
+    category: "Coastal Designs",
     items: [
       {
-        id: 'pixie-cut',
-        label: 'Pixie Cut',
-        desc: 'Chic, textured short crop',
-        img: 'images/optimized/women/pixie-cut.jpg'
+        id: 'links',
+        label: 'Traditional Links',
+        desc: 'Wind-swept dunes, deep pot bunkers, and no trees',
+        img: 'public/images/optimized/coastal/links.jpg'
       },
       {
-        id: 'mermaid-waves',
-        label: 'Mermaid Waves',
-        desc: 'Long, loose beachy waves',
-        img: 'images/optimized/women/mermaid-waves.jpg'
+        id: 'coastal-cliff',
+        label: 'Coastal Cliff',
+        desc: 'Dramatic holes played along the edge of ocean precipices',
+        img: 'public/images/optimized/coastal/cliffs.jpg'
       },
       {
-        id: 'italian-bob',
-        label: 'Italian Bob',
-        desc: 'Soft, voluminous neck-length bob',
-        img: 'images/optimized/women/italian-bob.jpg'
-      },
-      {
-        id: 'glass-bob',
-        label: 'Glass Bob',
-        desc: 'Ultra-shiny sharp espresso bob',
-        img: 'images/optimized/women/glass-bob.jpg'
+        id: 'tropical',
+        label: 'Tropical Resort',
+        desc: 'Pristine white sand, turquoise water hazards, and palm trees',
+        img: 'public/images/optimized/coastal/tropical.jpg'
       }
     ]
   },
   {
-    category: "Men's Trending",
+    category: "Arid & Desert",
     items: [
       {
-        id: 'curly-fringe',
-        label: 'Curly Fringe',
-        desc: 'Messy natural curls with high fade',
-        img: 'images/curly-fringe-man.png'
+        id: 'desert-target',
+        label: 'Desert Target',
+        desc: 'Emerald green fairways contrasting with harsh desert scrub',
+        img: 'public/images/optimized/arid/desert.jpg'
       },
       {
-        id: 'soft-pompadour',
-        label: 'Soft Pompadour',
-        desc: 'Matte swept-back volume',
-        img: 'images/soft-pompadour-man.png'
-      },
-      {
-        id: 'modern-mullet',
-        label: 'Modern Mullet',
-        desc: 'Fade sides, longer back, textured top',
-        img: 'images/optimized/men/modern-mullet.jpg'
-      },
-      {
-        id: 'textured-crop',
-        label: 'Textured Crop',
-        desc: 'Short matte finish with forward fringe',
-        img: 'images/optimized/men/textured-crop.jpg'
-      }
-    ]
-  },
-  {
-    category: "Men's Classics",
-    items: [
-      {
-        id: 'buzz-cut',
-        label: 'Buzz Cut',
-        desc: 'Clean, uniform short length',
-        img: 'images/optimized/men/textured-crop-classic.jpg'
-      },
-      {
-        id: 'side-part',
-        label: 'Side Part',
-        desc: 'Professional taper with defined part',
-        img: 'images/optimized/men/modern-mullet-classic.jpg'
-      },
-      {
-        id: 'long-flow',
-        label: 'Long Flow',
-        desc: 'Natural long waves with volume',
-        img: 'images/optimized/men/long-flow.jpg'
-      },
-      {
-        id: 'the-flow',
-        label: 'The Flow',
-        desc: 'Medium length pushed back styles',
-        img: 'images/optimized/men/the-flow.jpg'
+        id: 'canyon-wash',
+        label: 'Canyon Wash',
+        desc: 'Holes that weave through natural rock formations and dry washes',
+        img: 'public/images/optimized/arid/canyon.jpg'
       }
     ]
   }
 ];
 
 export const LUCKY_PROMPTS = [
-  "A futuristic cyberpunk bob with neon blue streaks",
-  "Vintage 1950s hollywood glamour waves",
-  "A wild, textured wolf cut with silver tips",
-  "Braided crown with loose wisps framing the face"
+  "A 17th hole island green surrounded by calm turquoise water",
+  "A links course at sunset with long shadows over deep pot bunkers",
+  "A majestic par 5 playing directly towards a snow-capped mountain range",
+  "A lush parkland course with a historic stone bridge over a small creek"
 ];
