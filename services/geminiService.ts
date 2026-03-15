@@ -3,11 +3,11 @@ import { GolfStyleOption } from "../types";
 
 // We create a fresh instance every time to ensure we capture the latest API key
 const getAiClient = () => {
-  const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+  const apiKey = import.meta.env.VITE_GEMINI_API_KEY || localStorage.getItem('gemini_api_key');
   if (!apiKey) {
-    console.warn("VITE_GEMINI_API_KEY not found in import.meta.env");
+    console.warn("Gemini API key not found in env or localStorage");
   }
-  return new GoogleGenAI({ apiKey: import.meta.env.VITE_GEMINI_API_KEY || '' });
+  return new GoogleGenAI({ apiKey: apiKey || '' });
 };
 
 export const generateTitleFromPrompt = async (promptText: string): Promise<string> => {

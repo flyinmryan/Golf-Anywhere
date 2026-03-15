@@ -41,8 +41,8 @@
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/ryanbaumann/golf-course-architect-ai.git
-   cd golf-course-architect-ai
+   git clone https://github.com/flyinmryan/golf-course-architect-ai.git
+   cd golf-course-architect
    ```
 
 2. Install dependencies:

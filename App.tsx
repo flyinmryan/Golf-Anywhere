@@ -41,7 +41,7 @@ export const App = () => {
           </div>
           <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Welcome to Golf Architect AI</h1>
           <p className="text-gray-600 dark:text-gray-400 mb-6">
-            To generate professional golf course designs, we need to access the Gemini API. Please select a project to continue.
+            To generate professional golf course designs, we need to access the Gemini API. Please connect your API key to continue.
           </p>
           <button
             onClick={handleSelectKey}

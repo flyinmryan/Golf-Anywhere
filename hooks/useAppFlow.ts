@@ -29,7 +29,8 @@ export const useAppFlow = () => {
         const has = await window.aistudio.hasSelectedApiKey();
         setHasKey(has);
       } else {
-        setHasKey(!!import.meta.env.VITE_GEMINI_API_KEY);
+        const key = import.meta.env.VITE_GEMINI_API_KEY || localStorage.getItem('gemini_api_key');
+        setHasKey(!!key);
       }
     };
     checkApiKey();
@@ -39,6 +40,12 @@ export const useAppFlow = () => {
     if (window.aistudio) {
       await window.aistudio.openSelectKey();
       setHasKey(true);
+    } else {
+      const key = prompt("Please enter your Gemini API Key:");
+      if (key) {
+        localStorage.setItem('gemini_api_key', key);
+        setHasKey(true);
+      }
     }
   };
 
