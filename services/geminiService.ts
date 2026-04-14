@@ -172,6 +172,22 @@ export const generateStyleSuggestions = async (
   }
 };
 
+// Helper to prepare image parts for Gemini
+const prepareImagePart = (image: string) => {
+  if (image.startsWith('data:')) {
+    const [mimeType, data] = image.split(';base64,');
+    return {
+      inlineData: {
+        mimeType: mimeType.split(':')[1] || 'image/jpeg',
+        data: data
+      }
+    };
+  }
+  // If it's a URL, we can't directly use it in inlineData without fetching first.
+  // In this app, we aim to convert everything to base64 before it hits the service.
+  return null;
+};
+
 export const generateGolfCourseImage = async (
   images: { main: string | null; aerial: string | null; perspective: string | null },
   styleDescription: string,
@@ -184,32 +200,17 @@ export const generateGolfCourseImage = async (
   const parts: any[] = [];
   
   if (images.main) {
-    const [mimeType, data] = images.main.split(';base64,');
-    parts.push({
-      inlineData: {
-        mimeType: mimeType.split(':')[1] || 'image/jpeg',
-        data: data
-      }
-    });
+    const part = prepareImagePart(images.main);
+    if (part) parts.push(part);
   }
   if (images.aerial) {
-    const [mimeType, data] = images.aerial.split(';base64,');
-    parts.push({
-      inlineData: {
-        mimeType: mimeType.split(':')[1] || 'image/jpeg',
-        data: data
-      }
-    });
+    const part = prepareImagePart(images.aerial);
+    if (part) parts.push(part);
   }
 
   if (styleReferenceImage) {
-    const [mimeType, data] = styleReferenceImage.split(';base64,');
-    parts.push({
-      inlineData: {
-        mimeType: mimeType.split(':')[1] || 'image/jpeg',
-        data: data
-      }
-    });
+    const part = prepareImagePart(styleReferenceImage);
+    if (part) parts.push(part);
   }
 
   let promptText = `

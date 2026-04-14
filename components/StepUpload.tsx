@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { ArrowRight, Mountain, Map, Compass } from 'lucide-react';
 import { ImageUpload } from './ImageUpload';
 import { UploadedImages, ViewType, GeneratedImage } from '../types';
+import { ImageSearchModal } from './ImageSearchModal';
 
 interface StepUploadProps {
   images: UploadedImages;
@@ -21,6 +22,30 @@ const PREVIEW_IMAGES = [
 ];
 
 export const StepUpload: React.FC<StepUploadProps> = ({ images, history, onUpload, onClear, onNext, onJumpToResult }) => {
+  const [searchView, setSearchView] = useState<ViewType | null>(null);
+
+  const handleSelectFromSearch = async (url: string) => {
+    if (!searchView) return;
+    
+    // We need to convert the URL to base64 to maintain consistency with the current upload flow
+    // In a real app, you might just store the URL, but here we'll fetch and convert.
+    try {
+      const response = await fetch(url);
+      const blob = await response.blob();
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        onUpload(searchView, reader.result as string);
+        setSearchView(null);
+      };
+      reader.readAsDataURL(blob);
+    } catch (error) {
+      console.error("Failed to process searched image", error);
+      // Fallback: just use the URL if base64 conversion fails (though geminiService expects base64)
+      onUpload(searchView, url);
+      setSearchView(null);
+    }
+  };
+
   return (
     <div className="container mx-auto px-6 flex flex-col lg:flex-row gap-8 lg:gap-12 items-start pb-20">
       
@@ -80,7 +105,7 @@ export const StepUpload: React.FC<StepUploadProps> = ({ images, history, onUploa
                 <div className="flex justify-between items-start mb-6">
                     <div>
                         <h2 className="text-xl font-bold text-slate-900 dark:text-white">Step 1: The Landscape</h2>
-                        <p className="text-sm text-slate-500 dark:text-slate-400 mt-0.5">Upload a photo of the potential course site.</p>
+                        <p className="text-sm text-slate-500 dark:text-slate-400 mt-0.5">Upload or search for a photo of the potential course site.</p>
                     </div>
                     <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-emerald-50 dark:bg-emerald-900/50 text-emerald-600 dark:text-emerald-300 border border-emerald-100 dark:border-emerald-800">
                         Required: Main View
@@ -95,6 +120,7 @@ export const StepUpload: React.FC<StepUploadProps> = ({ images, history, onUploa
                             image={images.main}
                             onUpload={onUpload}
                             onClear={onClear}
+                            onOpenSearch={(v) => setSearchView(v)}
                             required
                         />
                     </div>
@@ -105,6 +131,7 @@ export const StepUpload: React.FC<StepUploadProps> = ({ images, history, onUploa
                             image={images.aerial}
                             onUpload={onUpload}
                             onClear={onClear}
+                            onOpenSearch={(v) => setSearchView(v)}
                         />
                     </div>
                      <div className="flex flex-col gap-2">
@@ -114,6 +141,7 @@ export const StepUpload: React.FC<StepUploadProps> = ({ images, history, onUploa
                             image={images.perspective}
                             onUpload={onUpload}
                             onClear={onClear}
+                            onOpenSearch={(v) => setSearchView(v)}
                         />
                     </div>
                 </div>
@@ -151,6 +179,12 @@ export const StepUpload: React.FC<StepUploadProps> = ({ images, history, onUploa
                 </div>
             )}
       </div>
+
+      <ImageSearchModal 
+        isOpen={!!searchView}
+        onClose={() => setSearchView(null)}
+        onSelect={handleSelectFromSearch}
+      />
     </div>
   );
 };

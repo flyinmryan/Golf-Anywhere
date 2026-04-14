@@ -1,6 +1,6 @@
 
 import React, { useRef, useState, useEffect } from 'react';
-import { Upload, X, Camera, Mountain, RotateCcw, Compass } from 'lucide-react';
+import { Upload, X, Camera, Mountain, RotateCcw, Compass, Search } from 'lucide-react';
 import { ViewType } from '../types';
 
 interface ImageUploadProps {
@@ -8,10 +8,11 @@ interface ImageUploadProps {
   image: string | null;
   onUpload: (view: ViewType, base64: string) => void;
   onClear: (view: ViewType) => void;
+  onOpenSearch?: (view: ViewType) => void;
   required?: boolean;
 }
 
-export const ImageUpload: React.FC<ImageUploadProps> = ({ view, image, onUpload, onClear, required }) => {
+export const ImageUpload: React.FC<ImageUploadProps> = ({ view, image, onUpload, onClear, onOpenSearch, required }) => {
   const [isCameraOpen, setIsCameraOpen] = useState(false);
   const [cameraError, setCameraError] = useState<string | null>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -188,19 +189,26 @@ export const ImageUpload: React.FC<ImageUploadProps> = ({ view, image, onUpload,
              <p className="text-xs font-bold text-slate-700 dark:text-slate-300 text-center uppercase tracking-wide">Add Landscape</p>
              <p className="text-[10px] text-slate-400 text-center mb-4">Aerial or Wide View</p>
              
-             <div className="flex gap-2 w-full justify-center opacity-80 group-hover:opacity-100 transition-opacity max-w-[160px]">
+             <div className="flex gap-1.5 w-full justify-center opacity-80 group-hover:opacity-100 transition-opacity max-w-[180px]">
                <button
                  onClick={(e) => { e.stopPropagation(); setIsCameraOpen(true); }}
-                 className="px-3 py-1.5 text-[10px] font-bold uppercase bg-emerald-50 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-300 rounded hover:bg-emerald-100 dark:hover:bg-emerald-900/50 transition-colors w-1/2"
+                 className="px-2 py-1.5 text-[9px] font-bold uppercase bg-emerald-50 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-300 rounded hover:bg-emerald-100 dark:hover:bg-emerald-900/50 transition-colors flex-1"
                >
                   Live
                </button>
                
                <button
                  onClick={(e) => { e.stopPropagation(); inputRef.current?.click(); }}
-                 className="px-3 py-1.5 text-[10px] font-bold uppercase bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 rounded hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors w-1/2"
+                 className="px-2 py-1.5 text-[9px] font-bold uppercase bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 rounded hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors flex-1"
                >
                   Browse
+               </button>
+
+               <button
+                 onClick={(e) => { e.stopPropagation(); onOpenSearch?.(view); }}
+                 className="px-2 py-1.5 text-[9px] font-bold uppercase bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-300 rounded hover:bg-blue-100 dark:hover:bg-blue-900/50 transition-colors flex-1"
+               >
+                  Search
                </button>
              </div>
           </div>
